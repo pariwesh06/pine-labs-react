@@ -8,22 +8,23 @@ export class Userform extends React.Component {//MVC
             user: {
                 fname: 'Pariwesh1',
                 age: 30,
+                gender:'Male'
             },
             users: []
         }
-        BackendService.getUsers().done((users)=>{
+        BackendService.getUsers().done((users) => {
             this.setState({
                 users: users
             })
         });
     }//ES6
     save = (event) => {
-        BackendService.saveUser(this.state.user, 
-            (response)=>{ //success callback functions
+        BackendService.saveUser(this.state.user,
+            (response) => { //success callback functions
                 this.setState({  //to rerender, call setState
-                    users: [...this.state.users, response ]
+                    users: [...this.state.users, response]
                 });
-            }).fail((error)=>{
+            }).fail((error) => {
                 alert('Somemthing went wrong, please retry..');
             });
     }
@@ -32,19 +33,19 @@ export class Userform extends React.Component {//MVC
             user: Object.assign(this.state.user, { [event.target.name]: event.target.value })
         });
     }
-    deleteUser = function(index, userid)  {
+    deleteUser = function (index, userid) {
         const decision = window.confirm('Are you sure??');
-        if(!decision){
+        if (!decision) {
             return;
         }
         const promise = BackendService.deleteUser(userid);
-        promise.done((response)=>{
+        promise.done((response) => {
             this.state.users.splice(index, 1);
             this.setState({
-                users: this.state.users 
+                users: this.state.users
             })
         });
-        promise.fail((error)=> alert('Deletion failed'));
+        promise.fail((error) => alert('Deletion failed'));
         console.log(promise);
     }
     render() {
@@ -55,6 +56,9 @@ export class Userform extends React.Component {//MVC
                 <input value={userModel.age} name='age' onChange={this.handleEvent}
                     placeholder='first Name copy' style={{ background: this.props.color }} />
                 <input placeholder='salary' value={userModel.salary} onChange={this.handleEvent} name='salary'></input>
+                <input type='radio' checked='true' value='Male' onChange={this.handleEvent} name='gender'/>Male
+                <input type='radio' value='Female' onChange={this.handleEvent} name='gender'/>Female
+
                 <button onClick={this.save}>Save</button>
                 <table>
                     <thead >
@@ -63,7 +67,7 @@ export class Userform extends React.Component {//MVC
                         <th> Salary</th>
                     </thead>
                     <tbody>
-                        {this.state.users.map( (user, index)=> {
+                        {this.state.users.map((user, index) => {
                             return <tr>
                                 <td>{user.fname}</td>
                                 <td>{user.age}</td>
