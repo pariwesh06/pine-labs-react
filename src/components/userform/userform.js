@@ -2,6 +2,7 @@ import React from 'react';
 import { BackendService } from '../../backend-service';
 import './userform.css';
 export class Userform extends React.Component {//MVC
+    roles= ['Programmer', 'Manager' ,  'Lead'];
     constructor() { //only one 
         super();
         this.state = { //model
@@ -58,7 +59,8 @@ export class Userform extends React.Component {//MVC
                 <input placeholder='salary' value={userModel.salary} onChange={this.handleEvent} name='salary'></input>
                 <input type='radio' checked='true' value='Male' onChange={this.handleEvent} name='gender'/>Male
                 <input type='radio' value='Female' onChange={this.handleEvent} name='gender'/>Female
-
+                {this.roles.map((role)=> <div><input type='radio' value={role} onChange={this.handleEvent} name='role'></input>{role}</div>)}
+//dynamically
                 <button onClick={this.save}>Save</button>
                 <table>
                     <thead >
