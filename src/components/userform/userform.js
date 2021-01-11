@@ -11,12 +11,17 @@ export class Userform extends React.Component {//MVC
             },
             users: []
         }
+        BackendService.getUsers().done((users)=>{
+            this.setState({
+                users: users
+            })
+        });
     }//ES6
     save = (event) => {
         BackendService.saveUser(this.state.user, 
             (response)=>{ //success callback functions
                 this.setState({  //to rerender, call setState
-                    users: [...this.state.users, Object.assign({}, this.state.user)]
+                    users: [...this.state.users, response ]
                 });
             }).fail((error)=>{
                 alert('Somemthing went wrong, please retry..');
@@ -27,18 +32,20 @@ export class Userform extends React.Component {//MVC
             user: Object.assign(this.state.user, { [event.target.name]: event.target.value })
         });
     }
-    deleteUser = function(index, secodnArg)  {
+    deleteUser = function(index, userid)  {
         const decision = window.confirm('Are you sure??');
         if(!decision){
             return;
         }
-        console.log(decision);
-        console.log(this); 
-        console.log(index, secodnArg);
-        this.state.users.splice(index, 1);
-        this.setState({
-            users: this.state.users 
-        })
+        const promise = BackendService.deleteUser(userid);
+        promise.done((response)=>{
+            this.state.users.splice(index, 1);
+            this.setState({
+                users: this.state.users 
+            })
+        });
+        promise.fail((error)=> alert('Deletion failed'));
+        console.log(promise);
     }
     render() {
         const userModel = this.state.user;
@@ -61,7 +68,7 @@ export class Userform extends React.Component {//MVC
                                 <td>{user.fname}</td>
                                 <td>{user.age}</td>
                                 <td>{user.salary}</td>
-                                <td><button onClick={this.deleteUser.bind(this, index, 34)}>Delete</button></td>
+                                <td><button onClick={this.deleteUser.bind(this, index, user.id)}>Delete</button></td>
                             </tr>
                         })}
                     </tbody>
