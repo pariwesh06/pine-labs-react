@@ -15,4 +15,7 @@ export class BackendService{
     static getUsers(){
         return jquery.get(BASE_URL);
     }
+    static getRoles(){
+        return jquery.get('http://localhost:4200/roles');
+    }
 }
