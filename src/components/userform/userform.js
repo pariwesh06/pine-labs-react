@@ -33,6 +33,7 @@ export class Userform extends React.Component {//MVC
                     users: [...this.state.users, response]
                 });
             }).fail((error) => {
+                console.log(error);
                 alert('Somemthing went wrong, please retry..');
             });
     }
@@ -40,17 +41,17 @@ export class Userform extends React.Component {//MVC
         if (event.target.type == 'checkbox') {
             if (event.target.checked) {
                 //add values here
-                this.state.user[event.target.name].push(event.target.value);
+                this.state.user.skills.push(event.target.value);
             } else {
                 //remove basis value       
                 let i = -1;
-                this.state.user[event.target.name].map((value, index) => {
+                this.state.user.skills.map((value, index) => {
                     if (value == event.target.value) {
                         i = index;
                     }
                 });
                 if (i > -1) {
-                    this.state.user[event.target.name].splice(i, 1);
+                    this.state.user.skills.splice(i, 1);
                 }
             }
             this.setState({
@@ -71,7 +72,6 @@ export class Userform extends React.Component {//MVC
                 })
             });
             promise.fail((error) => alert('Deletion failed'));
-            console.log(promise);
         }
         sortAge = (event) => {
             console.log('sorted');
@@ -90,6 +90,9 @@ export class Userform extends React.Component {//MVC
                 sortOrder: order
             });
         }
+        // filterByName = (event)=>{
+        //     const promise = BackendService.filter(event.target.value);
+        // }
         render() {
             const userModel = this.state.user;
             return (
@@ -102,25 +105,30 @@ export class Userform extends React.Component {//MVC
                     <input type='radio' value='Female' onChange={this.handleEvent} name='gender' />Female
                     {this.state.roles.map((role) => <div><input type='radio' value={role} onChange={this.handleEvent} name='role'></input>{role}</div>)}
 
-                    <input value='Javascript' name='skills' onChange={this.handleEvent} type="checkbox" />Javascript
+                   <label>Skills:</label> <input value='Javascript' name='skills' onChange={this.handleEvent} type="checkbox" />Javascript
                     <input value='Java' name='skills' onChange={this.handleEvent} type="checkbox" />Java
                     <input value='React' name='skills' onChange={this.handleEvent} type="checkbox" />React
 
                     <button onClick={this.save}>Save</button>
                     <table>
                         <thead >
-                            <th>First Name</th>
+                            <th>First Name<div><input onChange={this.filterByName}></input></div></th>
                             <th onClick={this.sortAge}> Age</th>
                             <th> Salary</th>
                             <th>Role</th>
+                            <th>Skills</th>
                         </thead>
                         <tbody>
                             {this.state.users.map((user, index) => {
+                                let skills='';
+                                if(Array.isArray(user['skills[]'])) 
+                                   skills=  user['skills[]'].map(skill => skill+ ' ');
                                 return <tr>
                                     <td>{user.fname}</td>
                                     <td>{user.age}</td>
                                     <td>{user.salary}</td>
                                     <td>{user.role}</td>
+                                    <td>{skills}</td>
                                     <td><button onClick={this.deleteUser.bind(this, index, user.id)}>Delete</button></td>
                                 </tr>
                             })}
