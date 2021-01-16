@@ -5,6 +5,9 @@ export class BackendService{
     static saveUser(user, success){
         return jquery.post(BASE_URL, user, success);
     }
+    static filter(value){
+        return jquery.get(BASE_URL+'?fname='+value);
+    }
 
     static deleteUser(id){
         return jquery.ajax(BASE_URL+id, {

@@ -3,7 +3,85 @@
     {
       "fname": "Pariwesh1",
       "age": "30",
+      "gender": "Male",
+      "skills[]": "Javascript",
       "id": 1
+    },
+    {
+      "fname": "Pariwesh1",
+      "age": "30",
+      "gender": "Male",
+      "skills[]": [
+        "Javascript",
+        "Java"
+      ],
+      "id": 2
+    },
+    {
+      "fname": "Pariwesh1",
+      "age": "30",
+      "gender": "Male",
+      "skills[]": "Javascript",
+      "id": 3
+    },
+    {
+      "fname": "Pariwesh1",
+      "age": "30",
+      "gender": "Male",
+      "skills[]": "Javascript",
+      "id": 4
+    },
+    {
+      "fname": "Pariwesh1",
+      "age": "30",
+      "gender": "Male",
+      "skills[]": [
+        "Javascript",
+        "Java"
+      ],
+      "id": 5
+    },
+    {
+      "fname": "Pariwesh1",
+      "age": "30",
+      "gender": "Male",
+      "skills[]": "Javascript",
+      "id": 6
+    },
+    {
+      "fname": "Pariwesh1",
+      "age": "30",
+      "gender": "Male",
+      "id": 7
+    },
+    {
+      "fname": "Pariwesh1",
+      "age": "30",
+      "gender": "Male",
+      "skills[]": "Javascript",
+      "id": 8
+    },
+    {
+      "fname": "Pariwesh1",
+      "age": "30",
+      "gender": "Male",
+      "skills[]": [
+        "Javascript",
+        "Java"
+      ],
+      "id": 9
+    },
+    {
+      "fname": "Pariwesh1",
+      "age": "30",
+      "gender": "Male",
+      "id": 10
     }
+  ],
+  "roles": [
+    "Programmer",
+    "Manager",
+    "Lead",
+    "CTO"
   ]
 }
