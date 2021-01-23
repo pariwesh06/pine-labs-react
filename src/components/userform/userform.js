@@ -103,7 +103,7 @@ export class Userform extends React.Component {//MVC
         const promise = BackendService.filter(event.target.value);
         promise.done((response) => this.setState({
             users: response
-        }))
+        }));
     }
     render() {
         const userModel = this.state.user;
@@ -122,7 +122,7 @@ export class Userform extends React.Component {//MVC
                 <input value='React' name='skills' onChange={this.handleEvent} type="checkbox" />React
 
                 <button onClick={this.save}>Save</button>
-             
+
                 <table>
                     <thead >
                         <th>First Name<div><input onChange={this.filterByName}></input></div></th>

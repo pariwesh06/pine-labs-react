@@ -6,7 +6,7 @@ export default function UserformContainer(props){
     return (
         <span>
             <Userform></Userform>
-            <Counter count={this.state.users.length}></Counter>
+            <Counter ></Counter>
         </span>
     )
 }

@@ -1,7 +1,7 @@
 
 export default function Counter(props){
     return (
-        <span>Count: {props.count}</span>
+        <span id='mycouter'>Count: {props.count}</span>
     )
 }
 
