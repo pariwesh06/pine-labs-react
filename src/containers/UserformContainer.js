@@ -5,8 +5,9 @@ import { Userform } from "../components/userform/userform";
 export default function UserformContainer(props){
     return (
         <span>
-            <Userform></Userform>
             <Counter ></Counter>
+            <Counter ></Counter>
+            <Userform></Userform>
         </span>
     )
 }

@@ -1,3 +1,12 @@
+summary:
+A component can:
+1. have local state
+2. borrow data from Redux store as props.
+3. receive data from parent as props
+
+
+https://www.surveymonkey.com/r/GV66WY8
+
 npm i -g create-react-app  //only once
 create-react-app App1
 
