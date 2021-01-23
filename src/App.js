@@ -1,7 +1,7 @@
 import { Link, Route, BrowserRouter as Router, Switch, useLocation } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
-import { Userform } from "./components/userform/userform";
+import UserformContainer from './containers/UserformContainer';
 function App() { //component
   return (  //JSX
     <div className="App">
@@ -21,7 +21,7 @@ function App() { //component
             <Home></Home>
           </Route>
           <Route path="/userform">
-            <Userform></Userform>
+            <UserformContainer></UserformContainer>
           </Route>
           <Route path="*">
             <NoMatch></NoMatch>

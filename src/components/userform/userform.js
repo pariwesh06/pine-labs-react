@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BackendService } from '../../backend-service';
 import './userform.css';
+import Counter from "../Counter";
 export class Userform extends React.Component {//MVC
+
     constructor() { //only one 
         super();
         this.state = { //model
@@ -120,6 +122,7 @@ export class Userform extends React.Component {//MVC
                 <input value='React' name='skills' onChange={this.handleEvent} type="checkbox" />React
 
                 <button onClick={this.save}>Save</button>
+             
                 <table>
                     <thead >
                         <th>First Name<div><input onChange={this.filterByName}></input></div></th>
