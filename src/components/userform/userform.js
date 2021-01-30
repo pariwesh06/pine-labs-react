@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BackendService } from '../../backend-service';
 import './userform.css';
 import Counter from "../Counter";
-import { connect, dispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import updateCountAction from "../../redux-store/actions";
 class Userform extends React.Component {//MVC
 
@@ -97,8 +97,10 @@ class Userform extends React.Component {//MVC
             this.setState({
                 users: users
             });
-            this.props.updateCount({type:updateCountAction, 
-                payload: this.state.users.length});
+            this.props.updateCount({
+                type: updateCountAction,
+                payload: this.state.users.length
+            });
         });
     }
     filterByName = (event) => {
@@ -142,7 +144,7 @@ class Userform extends React.Component {//MVC
                             let skills = '';
                             if (Array.isArray(user['skills[]']))
                                 skills = user['skills[]'].map(skill => skill + ' ');
-                            return <tr>
+                            return <tr onClick={this.updateUserDetailsToStore.bind(this,user)}>
                                 <td>{user.fname}</td>
                                 <td>{user.age}</td>
                                 <td>{user.salary}</td>
@@ -156,11 +158,16 @@ class Userform extends React.Component {//MVC
             </span>
         );
     }
+    updateUserDetailsToStore = function( user){
+        console.log(user);
+        this.props.sendUserDetails({type:"UPDATE_USER", payload: user});
+    }
 }
 
 const MapDispatchToProps = function (dispatch) {
     return {
-        updateCount: (action) => { dispatch(action) }
+        updateCount: (action) => { dispatch(action) },
+        sendUserDetails: (action)=> {dispatch(action)}
     };
 }
 export default connect(null, MapDispatchToProps)(Userform);
