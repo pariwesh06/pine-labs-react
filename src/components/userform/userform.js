@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { BackendService } from '../../backend-service';
 import './userform.css';
 import Counter from "../Counter";
-export class Userform extends React.Component {//MVC
+import { connect, dispatch } from 'react-redux';
+import updateCountAction from "../../redux-store/actions";
+class Userform extends React.Component {//MVC
 
-    constructor() { //only one 
-        super();
+    constructor(props) { //only one 
+        super(props);
         this.state = { //model
             user: {
                 fname: 'Pariwesh1',
@@ -30,6 +32,8 @@ export class Userform extends React.Component {//MVC
                 this.setState({  //to rerender, call setState
                     users: [...this.state.users, response]
                 });
+                //  this.props.updateCount();
+                this.props.updateCount({ type: "UPDATE_COUNT", payload:this.state.users.length });
             }).fail((error) => {
                 console.log(error);
                 alert('Somemthing went wrong, please retry..');
@@ -88,7 +92,7 @@ export class Userform extends React.Component {//MVC
             sortOrder: order
         });
     }
-    getUsers(){
+    getUsers() {
         BackendService.getUsers().done((users) => {
             this.setState({
                 users: users
@@ -97,7 +101,7 @@ export class Userform extends React.Component {//MVC
     }
     filterByName = (event) => {
         if (event.target.value.length === 0) {
-          this.getUsers();
+            this.getUsers();
         }
         if (event.target.value.length < 3) return;
         const promise = BackendService.filter(event.target.value);
@@ -151,3 +155,10 @@ export class Userform extends React.Component {//MVC
         );
     }
 }
+
+const MapDispatchToProps = function (dispatch) {
+    return {
+        updateCount:(action)=> {dispatch(action)}
+    };
+}
+export default connect(null, MapDispatchToProps)(Userform);
