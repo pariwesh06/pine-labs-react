@@ -1,5 +1,3 @@
-const updateCountAction={
-    type: "UPDATE_COUNT",
-    payload: 23
-}
+const updateCountAction= "UPDATE_COUNT"
+
 export default updateCountAction;

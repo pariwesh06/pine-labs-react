@@ -32,8 +32,7 @@ class Userform extends React.Component {//MVC
                 this.setState({  //to rerender, call setState
                     users: [...this.state.users, response]
                 });
-                //  this.props.updateCount();
-                this.props.updateCount({ type: "UPDATE_COUNT", payload:this.state.users.length });
+                this.props.updateCount({ type: updateCountAction, payload: this.state.users.length });
             }).fail((error) => {
                 console.log(error);
                 alert('Somemthing went wrong, please retry..');
@@ -71,7 +70,8 @@ class Userform extends React.Component {//MVC
             this.state.users.splice(index, 1);
             this.setState({
                 users: this.state.users
-            })
+            });
+            this.props.updateCount({ type: updateCountAction, payload: this.state.users.length });
         });
         promise.fail((error) => alert('Deletion failed'));
     }
@@ -96,7 +96,9 @@ class Userform extends React.Component {//MVC
         BackendService.getUsers().done((users) => {
             this.setState({
                 users: users
-            })
+            });
+            this.props.updateCount({type:updateCountAction, 
+                payload: this.state.users.length});
         });
     }
     filterByName = (event) => {
@@ -112,7 +114,7 @@ class Userform extends React.Component {//MVC
     render() {
         const userModel = this.state.user;
         return (
-            <div>
+            <span id='userform'>
                 <input value={userModel.fname} name='fname' onChange={this.handleEvent} placeholder={this.props.label} style={{ background: this.props.color }} />
                 <input value={userModel.age} name='age' onChange={this.handleEvent}
                     placeholder='first Name copy' style={{ background: this.props.color }} />
@@ -151,14 +153,14 @@ class Userform extends React.Component {//MVC
                         })}
                     </tbody>
                 </table>
-            </div>
+            </span>
         );
     }
 }
 
 const MapDispatchToProps = function (dispatch) {
     return {
-        updateCount:(action)=> {dispatch(action)}
+        updateCount: (action) => { dispatch(action) }
     };
 }
 export default connect(null, MapDispatchToProps)(Userform);

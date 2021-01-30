@@ -1,9 +1,6 @@
 
 
-const reducer = function (state = {
-    count: 400,
-    name: 'Pariwesh'
-}, action) {
+const reducer = function (state = {}, action) {
     switch (action.type) {
         case "UPDATE_COUNT":
             //logic
