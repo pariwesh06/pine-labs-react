@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BackendService } from '../../backend-service';
 import './userform.css';
-import Counter from "../Counter";
 import { connect } from 'react-redux';
 import updateCountAction from "../../redux-store/actions";
+import ReactDatePicker from 'react-datepicker';
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+
 class Userform extends React.Component {//MVC
 
     constructor(props) { //only one 
@@ -13,7 +17,8 @@ class Userform extends React.Component {//MVC
                 fname: 'Pariwesh1',
                 age: 30,
                 gender: 'Male',
-                skills: []
+                skills: [],
+                dob:new Date()
             },
             roles: [],
             users: [],
@@ -39,7 +44,7 @@ class Userform extends React.Component {//MVC
             });
     }
     handleEvent = (event) => {
-        if (event.target.type == 'checkbox') {
+        if (event.target.type === 'checkbox') {
             if (event.target.checked) {
                 //add values here
                 this.state.user.skills.push(event.target.value);
@@ -47,7 +52,7 @@ class Userform extends React.Component {//MVC
                 //remove basis value       
                 let i = -1;
                 this.state.user.skills.map((value, index) => {
-                    if (value == event.target.value) {
+                    if (value === event.target.value) {
                         i = index;
                     }
                 });
@@ -113,6 +118,12 @@ class Userform extends React.Component {//MVC
             users: response
         }));
     }
+    handleDate=function(event){
+        console.log(arguments);
+        this.setState({
+            user: {...this.state.user, dob: arguments[0]}
+        })
+    }
     render() {
         const userModel = this.state.user;
         return (
@@ -128,7 +139,8 @@ class Userform extends React.Component {//MVC
                 <label>Skills:</label> <input value='Javascript' name='skills' onChange={this.handleEvent} type="checkbox" />Javascript
                 <input value='Java' name='skills' onChange={this.handleEvent} type="checkbox" />Java
                 <input value='React' name='skills' onChange={this.handleEvent} type="checkbox" />React
-
+                DOB : <DatePicker  selected={userModel.dob} onChange={this.handleDate.bind(this)}   showTimeSelect
+  dateFormat="Pp"/>
                 <button onClick={this.save}>Save</button>
 
                 <table>
@@ -144,7 +156,7 @@ class Userform extends React.Component {//MVC
                             let skills = '';
                             if (Array.isArray(user['skills[]']))
                                 skills = user['skills[]'].map(skill => skill + ' ');
-                            return <tr onClick={this.updateUserDetailsToStore.bind(this,user)}>
+                            return <tr onClick={this.updateUserDetailsToStore.bind(this, user)}>
                                 <td>{user.fname}</td>
                                 <td>{user.age}</td>
                                 <td>{user.salary}</td>
@@ -158,16 +170,16 @@ class Userform extends React.Component {//MVC
             </span>
         );
     }
-    updateUserDetailsToStore = function( user){
+    updateUserDetailsToStore = function (user) {
         console.log(user);
-        this.props.sendUserDetails({type:"UPDATE_USER", payload: user});
+        this.props.sendUserDetails({ type: "UPDATE_USER", payload: user });
     }
 }
 
 const MapDispatchToProps = function (dispatch) {
     return {
         updateCount: (action) => { dispatch(action) },
-        sendUserDetails: (action)=> {dispatch(action)}
+        sendUserDetails: (action) => { dispatch(action) }
     };
 }
 export default connect(null, MapDispatchToProps)(Userform);
