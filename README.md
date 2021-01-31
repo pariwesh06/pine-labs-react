@@ -16,6 +16,12 @@ git clone https://github.com/pariwesh06/pine-labs-react
 > npm i 
 > npm start
 
+Features:
+1. Grid - Filter, sorting, 
+2. Form - Add, Update, Delete, Search, validations, Date picker, 
+3. Redux : share Counter
+
+Pending: Fragments, Hooks, material design,
 
 # Getting Started with Create React App
 
