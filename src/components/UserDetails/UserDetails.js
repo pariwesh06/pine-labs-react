@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 function UserDetails(props) { //Receiver
     // which user selected?
     return <span>
+        <h5>User Details</h5>
         First Name: {props.data.user.fname},
         Age: {props.data.user.age}
     </span>

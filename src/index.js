@@ -6,7 +6,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import reducer from './redux-store/reducers';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-const initialState = { count: 5 }
+const initialState = {}
 
 const AllReducers = combineReducers({ data: reducer });
 const mystore = createStore(AllReducers, initialState, compose(applyMiddleware(thunk)));
